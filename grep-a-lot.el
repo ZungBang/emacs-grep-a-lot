@@ -4,6 +4,7 @@
 
 ;; Author: Avi Rozen <avi.rozen@gmail.com>
 ;; Keywords: tools, convenience, search
+;; Version: %Id:%
 
 ;; This file is NOT part of GNU Emacs.
 
