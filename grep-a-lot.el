@@ -40,6 +40,7 @@
 ;;    performance.
 ;; 2. Add the following to your ~/.emacs:
 ;;    (require 'grep-a-lot)
+;;    (grep-a-lot-setup-keys)
 ;;
 ;; Currently, there are no customization options.
 ;;    
@@ -281,11 +282,13 @@ so as to enable multiple search results buffers."
 (add-hook 'grep-setup-hook 'grep-a-lot-grep-setup-hook)
 (add-hook 'kill-buffer-hook 'grep-a-lot-kill-buffer-hook)
 
-;; expand navigation related key bindings
-(define-key esc-map "g]" 'grep-a-lot-goto-next)
-(define-key esc-map "g[" 'grep-a-lot-goto-prev)
-(define-key esc-map "g-" 'grep-a-lot-pop-stack)
-(define-key esc-map "g_" 'grep-a-lot-clear-stack)
-(define-key esc-map "g=" 'grep-a-lot-restart-context)
+(defun grep-a-lot-setup-keys()
+  "Define some key bindings for navigating multiple
+grep search results buffers." 
+  (define-key esc-map "g]" 'grep-a-lot-goto-next)
+  (define-key esc-map "g[" 'grep-a-lot-goto-prev)
+  (define-key esc-map "g-" 'grep-a-lot-pop-stack)
+  (define-key esc-map "g_" 'grep-a-lot-clear-stack)
+  (define-key esc-map "g=" 'grep-a-lot-restart-context))
 
 (provide 'grep-a-lot)
