@@ -266,8 +266,8 @@ so as to enable multiple search results buffers."
   (let ((name (make-symbol (concat "grep-a-lot-" (symbol-name func)))))
     `(defadvice ,func (around ,name activate)
        "Use multiple search-results buffers."
-       (let ((grep-a-lot-context-initial (point-marker)))
-         (set (make-local-variable 'compilation-buffer-name-function) 'grep-a-lot-buffer-name-function)
+       (let ((grep-a-lot-context-initial (point-marker))
+             (compilation-buffer-name-function 'grep-a-lot-buffer-name-function))
          ad-do-it
          ad-return-value))))
 
