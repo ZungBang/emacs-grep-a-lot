@@ -1,6 +1,6 @@
 ;;; grep-a-lot.el --- manages multiple search results buffers for grep.el
 
-;; Copyright (C) 2008 Avi Rozen
+;; Copyright (C) 2008, 2009 Avi Rozen
 
 ;; Author: Avi Rozen <avi.rozen@gmail.com>
 ;; Keywords: tools, convenience, search
@@ -108,14 +108,14 @@ With REVERSE non-nil the sort order is reversed."
         (if (grep-a-lot-buffer-p buffer)
             (setq buffers (append buffers (list buffer))))
         (setq all-buffers (cdr all-buffers))))
-    ;; sort buffers by name
+    ;; sort buffers
     (sort buffers (lambda (a b)
-                    (let ((name-a (buffer-name a))
-                          (name-b (buffer-name b)))
+                    (let ((pos-a (grep-a-lot-buffer-position (buffer-name a)))
+                          (pos-b (grep-a-lot-buffer-position (buffer-name b))))
                       (if reverse
-                          ;; assume name-a and name-b are not equal
-                          (string-lessp name-b name-a)
-                        (string-lessp name-a name-b)))))))
+                          ;; assume pos-a and pos-b are not equal
+                          (< pos-b pos-a)
+                        (< pos-a pos-b)))))))
 
 (defun grep-a-lot-last-buffer ()
   "Return last grep-a-lot buffer."
