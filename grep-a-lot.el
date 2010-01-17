@@ -41,6 +41,8 @@
 ;; 2. Add the following to your ~/.emacs:
 ;;    (require 'grep-a-lot)
 ;;    (grep-a-lot-setup-keys)
+;; 3. If you're using igrep.el you may want to add:
+;;    (grep-a-lot-advise igrep)
 ;;
 ;; Currently, there are no customization options.
 ;;    
@@ -182,7 +184,7 @@ Return -1 if NAME is does not match `grep-a-lot-buffer-name-regexp'."
 
 (defun grep-a-lot-buffer-name-function (name)
   "Set current grep search results buffer name."
-  (when (string-equal name "grep")
+  (when (string-match "^i?grep$" name)
     (grep-a-lot-buffer-name (1+ (grep-a-lot-buffer-position (buffer-name (grep-a-lot-last-buffer)))))))
 
 (defun grep-a-lot-kill-buffer-hook ()
