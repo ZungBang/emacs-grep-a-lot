@@ -93,8 +93,7 @@ With no argument or nil as argument, check current buffer."
 With no argument or nil as argument, check current buffer."
   (let ((buffer (grep-a-lot-buffer-p buffer)))
     (if buffer
-        (save-excursion
-          (set-buffer buffer)
+        (with-current-buffer buffer
           (if grep-a-lot-is-current-buffer
               buffer
             nil))
@@ -146,13 +145,11 @@ If CURRENT-BUFFER is not specified or is nil, then use current buffer."
     ;; reset is-current flag in all buffers
     (while buffers
       (let ((buffer (car buffers)))
-        (save-excursion
-          (set-buffer buffer)
+        (with-current-buffer buffer
           (set (make-local-variable 'grep-a-lot-is-current-buffer) nil)))
       (setq buffers (cdr buffers)))
     ;; set is-current flag in current-buffer
-    (save-excursion
-      (set-buffer current-buffer)
+    (with-current-buffer current-buffer
       (set (make-local-variable 'grep-a-lot-is-current-buffer) t))))
 
 (defun grep-a-lot-next-buffer (&optional reverse)
@@ -205,8 +202,7 @@ Return -1 if NAME is does not match `grep-a-lot-buffer-name-regexp'."
   (let ((position (grep-a-lot-buffer-position (buffer-name next-error-last-buffer))))
     (when (>= position 0)
       (let ((context (point-marker)))
-        (save-excursion
-          (set-buffer next-error-last-buffer)
+        (with-current-buffer next-error-last-buffer
           (set (make-local-variable 'grep-a-lot-context) context)
           (grep-a-lot-set-current-buffer))))))
 
@@ -214,8 +210,7 @@ Return -1 if NAME is does not match `grep-a-lot-buffer-name-regexp'."
   "Restore GREP-BUFFER context.
 If INITIAL is non nil then use initial context."
   (let* ((context (and grep-buffer
-                       (save-excursion
-                         (set-buffer grep-buffer)
+                       (with-current-buffer grep-buffer
                          (if initial
                              grep-a-lot-context-initial
                            grep-a-lot-context)))))
