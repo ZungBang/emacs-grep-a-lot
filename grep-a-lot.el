@@ -259,6 +259,7 @@ If GREP-BUFFER is nil then restart context of current search results buffer."
   (interactive)
   (mapcar 'kill-buffer (grep-a-lot-buffers)))
 
+;;;###autoload
 (defmacro grep-a-lot-advise (func)
   "Advise a grep-like function FUNC with an around-type advice,
 so as to enable multiple search results buffers."
@@ -280,6 +281,7 @@ so as to enable multiple search results buffers."
 (add-hook 'grep-setup-hook 'grep-a-lot-grep-setup-hook)
 (add-hook 'kill-buffer-hook 'grep-a-lot-kill-buffer-hook)
 
+;;;###autoload
 (defun grep-a-lot-setup-keys()
   "Define some key bindings for navigating multiple
 grep search results buffers." 
