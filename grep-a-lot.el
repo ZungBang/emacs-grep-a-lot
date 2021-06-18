@@ -1,6 +1,6 @@
 ;;; grep-a-lot.el --- manages multiple search results buffers for grep.el
 
-;; Copyright (C) 2008-2013 Avi Rozen
+;; Copyright (C) 2008-2021 Avi Rozen
 
 ;; Author: Avi Rozen <avi.rozen@gmail.com>
 ;; Keywords: tools, convenience, search
