@@ -1,0 +1,13 @@
+# https://github.com/github/gitignore/blob/master/Elisp.gitignore
+
+# Compiled
+*.elc
+
+# Packaging
+.cask
+
+# Backup files
+*~
+
+# Undo-tree save-files
+*.~undo-tree
